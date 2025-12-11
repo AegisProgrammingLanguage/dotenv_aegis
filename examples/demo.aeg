@@ -1,0 +1,35 @@
+import "packages/dotenv/dotenv.aeg"
+import "stdlib/system.aeg"
+import "stdlib/fs.aeg"
+import "stdlib/process.aeg" // Pour le nettoyage rm
+
+print "--- TEST DOTENV ---"
+
+// 1. Création d'un fichier .env factice
+var env_content = "SECRET_KEY=AegisIsAwesome\nPORT=9090"
+File.write(".env", env_content)
+print "Fichier .env cree."
+
+// 2. Vérification AVANT chargement (doit être null)
+if (System.env("SECRET_KEY") == null) {
+    print "Verification: Variable inconnue avant chargement (OK)"
+} else {
+    print "❌ Erreur: Variable deja la ?"
+}
+
+// 3. Chargement
+var path = Env.load()
+print "Fichier charge depuis : " + path
+
+// 4. Vérification APRES chargement
+var secret = System.env("SECRET_KEY")
+var port = System.env("PORT")
+
+print "SECRET_KEY : " + secret
+print "PORT       : " + port
+
+if (secret == "AegisIsAwesome") {
+    print "✅ SUCCES : Les variables sont chargees."
+} else {
+    print "❌ ECHEC : Valeur incorrecte."
+}
