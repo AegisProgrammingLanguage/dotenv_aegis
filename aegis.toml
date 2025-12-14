@@ -1,0 +1,19 @@
+[project]
+name = "dotenv"
+version = "0.1.0"
+description = "Aegis Natives Binding for the graphic library GL"
+author = "Ethan Rucar <ethan.rucar@gmail.com>"
+license = "MIT"
+exclude = [
+    "src",
+    "target",
+    "Cargo.lock",
+    "Cargo.toml"
+]
+
+[targets]
+linux = "libdotenv.so"
+window = "dotenv.dll"
+macos = "libdotenv.dylib"
+
+[dependencies]
